@@ -17,6 +17,8 @@ export default function App() {
     setScanned(true);
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     console.log(data);
+    fetch(data)
+    .then(response => console.log(response.json()))
   };
 
   if (hasPermission === null) {
