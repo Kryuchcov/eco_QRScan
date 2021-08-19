@@ -1,21 +1,60 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+// App.js
 
-export default function App() {
+import * as React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
+import IniciarSesion from "./src/Components/IniciarSesion";
+import CrearCuenta from "./src/Components/CrearCuenta";
+import PrincipalUser from "./src/Components/PrincipalUser";
+import QRScanner from "./src/Components/QRScanner";
+
+
+const Stack = createStackNavigator();
+
+function MyStack() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Stack.Navigator
+      initialRouteName="Signup"
+      screenOptions={{
+        headerTitleAlign: "center",
+        headerStyle: {
+          backgroundColor: "#3740FE",
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+      }}
+    >
+      <Stack.Screen
+        name="CrearCuenta"
+        component={CrearCuenta}
+        options={{ title: "CrearCuenta" }}
+      />
+      <Stack.Screen
+        name="IniciarSesion"
+        component={IniciarSesion}
+        options={({ title: "IniciarSesion" }, { headerLeft: null })}
+      />
+      <Stack.Screen
+        name="PrincipalUser"
+        component={PrincipalUser}
+        options={({ title: "Perfil" }, { headerLeft: null })}
+      />
+      <Stack.Screen
+        name="QRScanner"
+        component={QRScanner}
+        options={({ title: "QRScanner" }, { headerLeft: null })}
+      />
+    </Stack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
+  );
+}
